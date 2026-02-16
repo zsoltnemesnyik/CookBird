@@ -7,8 +7,26 @@ type MealsListProps = {
   error: string | null;
 };
 
+const SkeletonMealCard = () => {
+  return (
+    <div className="rounded-lg p-4 w-full animate-pulse">
+      <div className="bg-gray-200 h-32 w-full mb-4 rounded"></div>
+      <div className="h-6 bg-gray-200 rounded mb-2"></div>
+    </div>
+  );
+};
+
 function MealsList({ meals, loading, error }: MealsListProps) {
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {Array(12)
+          .fill(0)
+          .map((_, idx) => (
+            <SkeletonMealCard key={idx} />
+          ))}
+      </div>
+    );
   if (error) return <p className="text-red-500">{error}</p>;
   if (meals.length === 0) return <p>No meals found.</p>;
 
