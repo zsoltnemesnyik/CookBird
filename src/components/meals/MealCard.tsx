@@ -1,19 +1,15 @@
 import { useState } from "react";
 import type { Meal } from "../../models/interfaces";
+import { Link } from "react-router-dom";
+import { SINGLE_MEAL_PATH } from "../../lib/constants";
 
-interface Props {
-  meal: Meal;
-}
-
-const MealCard = ({ meal }: Props) => {
+const MealCard = ({ meal }: { meal: Meal }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div>
+    <Link to={`/${SINGLE_MEAL_PATH}/${meal.idMeal}`}>
       {/* Skeleton / Placeholder */}
-      {!imgLoaded && (
-        <div className="bg-gray-200 h-32 w-full animate-pulse" />
-      )}
+      {!imgLoaded && <div className="bg-gray-200 h-32 w-full animate-pulse" />}
 
       {/* Lazy-load kép + Blur + Fade-in */}
       <img
@@ -26,11 +22,9 @@ const MealCard = ({ meal }: Props) => {
       />
 
       <div className="p-2">
-        <h2 className="font-bold text-lg">
-          {meal.strMeal}
-        </h2>
+        <h2 className="font-bold text-lg">{meal.strMeal}</h2>
       </div>
-    </div>
+    </Link>
   );
 };
 
