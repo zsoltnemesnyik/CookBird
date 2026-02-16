@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import useFetch from "./hooks/useFetch";
+import type { MealApiResponse } from "./models/interfaces";
+
+import CategoryList from "./components/categories/CategoryList";
+import MealsList from "./components/meals/MealsList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState<string>("Beef");
+
+  const { data, error, loading } = useFetch<MealApiResponse>(
+    `${import.meta.env.VITE_BASE_API}/filter.php?c=${selectedCategory}`
+  );
+
+  const meals = data?.meals ?? [];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">CookBird</h1>
+
+      <div className="grid sm:grid-cols-[minmax(200px,1fr)_3fr] gap-8">
+        <div>
+          <h3 className="text-lg font-bold">Categories</h3>
+          <CategoryList setSelectedCategory={setSelectedCategory} />
+        </div>
+
+        <MealsList meals={meals} loading={loading} error={error} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </main>
+  );
 }
 
-export default App
+export default App;
