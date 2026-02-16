@@ -21,7 +21,10 @@ function App() {
       <div className="grid sm:grid-cols-[minmax(200px,1fr)_3fr] gap-8">
         <div>
           <h3 className="text-lg font-bold">Categories</h3>
-          <CategoryList setSelectedCategory={setSelectedCategory} />
+          <CategoryList
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         </div>
 
         <MealsList meals={meals} loading={loading} error={error} />
