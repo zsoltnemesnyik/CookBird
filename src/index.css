@@ -134,3 +134,24 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.recipe-hero {
+  position: fixed;
+  /* v1 - fullwidth */
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  /* v2 - distanced width */
+  /*   
+  top: 15px;
+  left: 15px;
+  width: calc(100% - 30px);  
+  */
+
+  /* v3 - auto width */
+  /* 
+  width: auto; 
+  */
+  z-index: 50;
+}

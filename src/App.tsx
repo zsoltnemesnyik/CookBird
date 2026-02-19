@@ -4,8 +4,6 @@ import PageMeals from "./pages/PageMeals";
 import PageRecipe from "./pages/PageRecipe";
 
 function App() {
-  
-
   return (
     <>
       <BrowserRouter>
