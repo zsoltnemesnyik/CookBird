@@ -13,7 +13,7 @@ const MealCard = ({ meal }: { meal: Meal }) => {
 
       {/* Lazy-load kép + Blur + Fade-in */}
       <img
-        src={meal.strMealThumb}
+        src={`${meal.strMealThumb}/small`}
         alt={meal.strMeal}
         loading="lazy"
         onLoad={() => setImgLoaded(true)}
