@@ -8,7 +8,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <main className="container mx-auto p-4">
+        <main className="container mx-auto p-4 relative z-10">
           <Routes>
             <Route path="/" element={<PageMeals />} />
             <Route path={`/meal/:id`} element={<PageRecipe />} />

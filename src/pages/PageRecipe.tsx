@@ -2,9 +2,13 @@ import gsap from "gsap";
 import { Flip, SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import type { MealApiResponse } from "../models/interfaces";
+import { Button } from "@/components/ui/button";
+import { ArrowLeftIcon } from "lucide-react";
+import { getIngredients } from "@/lib/utils";
+import BackgroundLines from "@/components/layout/BackgroundLines";
 
 gsap.registerPlugin(Flip, SplitText);
 
@@ -59,7 +63,7 @@ const PageRecipe = () => {
                 {
                     borderRadius: 30,
                     duration: 1.5,
-                    delay: .2
+                    delay: .3
                 },
             );
             
@@ -111,33 +115,59 @@ const PageRecipe = () => {
     if (meals.length === 0) return <p>No single meal found.</p>;
 
     return (
-        <section className="pt-16 flex flex-col gap-8 max-w-4xl mx-auto">
+        <section className="pt-16 flex flex-col gap-8 max-w-5xl mx-auto">
             <h1
                 ref={titleRef}
                 className="text-4xl font-bold text-center invisible"
             >
                 {meals[0].strMeal}
             </h1>
-
             <div
                 ref={imgWrapperRef}
                 className="recipe-hero relative overflow-hidden"
             >
                 <img
-                    src={meals[0].strMealThumb}
+                    src={`${meals[0].strMealThumb}/large`}
                     alt={meals[0].strMeal}
-                    onLoad={() => setImgLoaded(true)}
+                    onLoad={() => 
+                        setTimeout(() => {
+                            setImgLoaded(true)        
+                        }, 500)}
                     className={`w-full h-[clamp(250px,60vh,450px)] object-cover transition-all duration-700
           ${imgLoaded ? "opacity-100 blur-0" : "opacity-0 blur-md"}`}
                 />
             </div>
 
-            <p
+            <div
                 ref={descRef}
-                className="text-lg invisible opacity-0"
+                className="flex flex-col gap-8 invisible opacity-0"
             >
-                {meals[0].strInstructions}
-            </p>
+                <div className="flex gap-8">
+                    <div className="flex-2">
+                        <h3>Instructions</h3>
+                        <p>
+                            {meals[0].strInstructions}
+                        </p>
+                    </div>
+                    <div className="flex-1">
+                        <h3>Ingredients</h3>
+                        <ul>
+                        {getIngredients(meals[0]).map((item, index) => (
+                            <li key={index}>
+                            {item.measure} {item.ingredient}
+                            </li>
+                        ))}
+                        </ul>
+                    </div>
+                </div>
+                <Button className="self-center" asChild>
+                    <Link to="/">
+                        <ArrowLeftIcon />
+                        Back to Home
+                    </Link>
+                </Button>
+            </div>
+          <BackgroundLines />
         </section>
     );
 };

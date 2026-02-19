@@ -14,7 +14,7 @@ const Header = () => {
   })
 
   return (
-    <header className="fixed w-full top-0 bg-white">
+    <header className="fixed w-full top-0 z-20">
         <div className="container mx-auto px-5 py-3 flex justify-between items-center">
             <Link to="/" className="text-2xl">
               <span>COOKBIRD</span>
