@@ -9,7 +9,7 @@ const MealCard = ({ meal }: { meal: Meal }) => {
   return (
     <Link to={`/${SINGLE_MEAL_PATH}/${meal.idMeal}`}>
       {/* Skeleton / Placeholder */}
-      {!imgLoaded && <div className="bg-gray-200 h-32 w-full animate-pulse" />}
+      {/* {!imgLoaded && <div className="bg-black/15 h-32 w-full animate-pulse" />} */}
 
       {/* Lazy-load kép + Blur + Fade-in */}
       <img
