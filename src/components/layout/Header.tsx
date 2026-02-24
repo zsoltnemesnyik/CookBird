@@ -22,7 +22,7 @@ const Header = () => {
             <nav>
                 <ul className="flex max-md:flex-col gap-5">
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="/favorites">Favourites</Link></li>
+                    <li><Link to="/favourites">Favourites</Link></li>
                 </ul>
             </nav>
         </div>

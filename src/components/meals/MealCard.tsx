@@ -2,12 +2,14 @@ import { useState } from "react";
 import type { Meal } from "../../models/interfaces";
 import { Link } from "react-router-dom";
 import { SINGLE_MEAL_PATH } from "../../lib/constants";
+import { ArrowRight, HeartIcon } from "lucide-react";
+import { Button } from "../ui/button";
 
 const MealCard = ({ meal }: { meal: Meal }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <Link to={`/${SINGLE_MEAL_PATH}/${meal.idMeal}`}>
+    <div className="h-full flex flex-col gap-2">
       {/* Skeleton / Placeholder */}
       {/* {!imgLoaded && <div className="bg-black/15 h-32 w-full animate-pulse" />} */}
 
@@ -21,10 +23,17 @@ const MealCard = ({ meal }: { meal: Meal }) => {
           ${imgLoaded ? "opacity-100 blur-0" : "opacity-0 blur-md"}`}
       />
 
-      <div className="p-2">
-        <h2 className="font-bold text-lg">{meal.strMeal}</h2>
+      <h2 className="grow font-bold text-lg mb-5">{meal.strMeal}</h2>
+      <div className="flex items-center justify-between">
+        <Button asChild size={"xs"}>
+          <Link to={`/${SINGLE_MEAL_PATH}/${meal.idMeal}`}>
+            View Recipe
+            <ArrowRight className="ml-2" />
+          </Link>
+        </Button>
+        <HeartIcon />
       </div>
-    </Link>
+    </div>
   );
 };
 
