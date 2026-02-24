@@ -13,12 +13,12 @@ const BackgroundLines = () => {
     gsap.fromTo(
       lines,
       {
-        opacity: 0,
+        opacity: .5,
         background: "hsla(0, 0%, 0%, 1)",
         yPercent: (i) => (i % 2 === 0 ? 50 : -50),
       },
       {
-        background: "hsla(0, 0%, 0%, .1)",
+        background: "hsla(0, 0%, 0%, .05)",
         opacity: 1,
         yPercent: 0,
         duration: .75,
@@ -33,9 +33,9 @@ const BackgroundLines = () => {
       ref={containerRef}
       className="fixed inset-0 pointer-events-none -z-10"
     >
-      <span className="absolute left-1/4 top-0 w-px h-screen bg-black/10 " />
-      <span className="absolute left-1/2 top-0 w-px h-screen bg-black/10 " />
-      <span className="absolute left-3/4 top-0 w-px h-screen bg-black/10 " />
+      <span className="absolute left-1/4 top-0 w-px h-screen " />
+      <span className="absolute left-1/2 top-0 w-px h-screen " />
+      <span className="absolute left-3/4 top-0 w-px h-screen " />
     </div>
   );
 };
