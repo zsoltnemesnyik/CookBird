@@ -5,7 +5,7 @@ import { SINGLE_MEAL_PATH } from "../../lib/constants";
 import { ArrowRight, HeartIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
-const MealCard = ({ meal }: { meal: Meal }) => {
+const MealCard = ({ meal, saved, handleClick }: { meal: Meal, saved: boolean, handleClick: (id: string) => void }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
@@ -31,7 +31,7 @@ const MealCard = ({ meal }: { meal: Meal }) => {
             <ArrowRight className="ml-2" />
           </Link>
         </Button>
-        <HeartIcon />
+        <HeartIcon className="cursor-pointer hover:opacity-65 transition-opacity" fill={saved ? "red" : "none"} onClick={() => handleClick(meal.idMeal)} />
       </div>
     </div>
   );

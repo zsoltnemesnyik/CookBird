@@ -115,7 +115,7 @@ const PageRecipe = () => {
     if (meals.length === 0) return <p>No single meal found.</p>;
 
     return (
-        <section className="pt-16 flex flex-col gap-8 max-w-5xl mx-auto">
+        <section className="flex flex-col gap-8 max-w-5xl mx-auto">
             <h1
                 ref={titleRef}
                 className="text-4xl font-bold text-center invisible"
@@ -152,11 +152,11 @@ const PageRecipe = () => {
                     <div className="flex-1">
                         <h3>Ingredients</h3>
                         <ul>
-                        {getIngredients(meals[0]).map((item, index) => (
-                            <li key={index}>
-                            {item.measure} {item.ingredient}
-                            </li>
-                        ))}
+                            {getIngredients(meals[0]).map((item, index) => (
+                                <li key={index}>
+                                    {item.measure} {item.ingredient}
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
