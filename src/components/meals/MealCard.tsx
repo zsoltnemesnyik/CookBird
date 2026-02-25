@@ -2,10 +2,19 @@ import { useState } from "react";
 import type { Meal } from "../../models/interfaces";
 import { Link } from "react-router-dom";
 import { SINGLE_MEAL_PATH } from "../../lib/constants";
-import { ArrowRight, HeartIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
+import AddToFavourites from "./AddToFavourites";
 
-const MealCard = ({ meal, saved, handleClick }: { meal: Meal, saved: boolean, handleClick: (id: string) => void }) => {
+const MealCard = ({
+  meal,
+  saved,
+  handleClick,
+}: {
+  meal: Meal;
+  saved: boolean;
+  handleClick: (id: string) => void;
+}) => {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
@@ -31,7 +40,7 @@ const MealCard = ({ meal, saved, handleClick }: { meal: Meal, saved: boolean, ha
             <ArrowRight className="ml-2" />
           </Link>
         </Button>
-        <HeartIcon className="cursor-pointer hover:opacity-65 transition-opacity" fill={saved ? "red" : "none"} onClick={() => handleClick(meal.idMeal)} />
+        <AddToFavourites saved={saved} handleClick={handleClick} id={meal.idMeal} />
       </div>
     </div>
   );

@@ -9,11 +9,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeftIcon } from "lucide-react";
 import { getIngredients } from "@/lib/utils";
 import BackgroundLines from "@/components/layout/BackgroundLines";
+import AddToFavourites from "@/components/meals/AddToFavourites";
+import { useFavourites } from "@/hooks/useFavourites";
 
 gsap.registerPlugin(Flip, SplitText);
 
 const PageRecipe = () => {
     const { id } = useParams();
+    const { toggleFavourite, favourites } = useFavourites();
 
     const [imgLoaded, setImgLoaded] = useState(false);
 
@@ -39,6 +42,7 @@ const PageRecipe = () => {
                 return;
 
             const element = imgWrapperRef.current;
+            gsap.set(element, { zIndex: 50 });
 
             // ---- TITLE SPLIT ----
             const split = SplitText.create(titleRef.current, {
@@ -126,6 +130,7 @@ const PageRecipe = () => {
                 ref={imgWrapperRef}
                 className="recipe-hero relative overflow-hidden"
             >
+                <AddToFavourites position="absolute" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
                 <img
                     src={`${meals[0].strMealThumb}/large`}
                     alt={meals[0].strMeal}
@@ -144,13 +149,13 @@ const PageRecipe = () => {
             >
                 <div className="flex gap-8">
                     <div className="flex-2">
-                        <h3>Instructions</h3>
+                        <h2 className="text-xl font-medium mb-3">Instructions</h2>
                         <p>
                             {meals[0].strInstructions}
                         </p>
                     </div>
                     <div className="flex-1">
-                        <h3>Ingredients</h3>
+                        <h2 className="text-xl font-medium mb-3">Ingredients</h2>
                         <ul>
                             {getIngredients(meals[0]).map((item, index) => (
                                 <li key={index}>
