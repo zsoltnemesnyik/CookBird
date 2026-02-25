@@ -10,10 +10,7 @@ type MealsListProps = {
 };
 
 function MealsList({ meals, loading, error }: MealsListProps) {
-  const { favourites, addFavourite } = useFavourites();
-  const handleFavourite = (id: string) => {
-    addFavourite(id);
-  };
+  const { favourites, toggleFavourite } = useFavourites();
 
   if (loading) return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -33,7 +30,7 @@ function MealsList({ meals, loading, error }: MealsListProps) {
         <MealCard
           key={meal.idMeal}
           meal={meal}
-          handleClick={handleFavourite}
+          handleClick={toggleFavourite}
           saved={favourites.includes(meal.idMeal)}
         />
       ))}

@@ -12,13 +12,16 @@ export const useFavourites = () => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(favourites));
     }, [favourites]);
 
-    const addFavourite = (id: string) => {
-        if (favourites.includes(id)) return;
-        setFavourites([...favourites, id]);
+    const toggleFavourite = (id: string) => {
+        if (favourites.includes(id)) {
+            setFavourites(favourites.filter(f => f !== id));
+        } else {
+            setFavourites([...favourites, id]);
+        }
     };
 
     return {
         favourites,
-        addFavourite,
+        toggleFavourite,
     };
 };
