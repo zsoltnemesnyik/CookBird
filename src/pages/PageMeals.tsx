@@ -16,7 +16,7 @@ const [selectedCategory, setSelectedCategory] = useState<string>("Beef");
 
   return (
     <>
-        <h1 className="text-3xl font-bold mb-6 text-center">CookBird</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">{`${selectedCategory} Meals`}</h1>
 
         <div className="grid sm:grid-cols-[minmax(200px,1fr)_3fr] gap-8">
           <div>
