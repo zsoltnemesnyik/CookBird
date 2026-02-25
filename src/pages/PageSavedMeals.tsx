@@ -4,7 +4,7 @@ import type { Meal } from "@/models/interfaces";
 import { useEffect, useState } from "react";
 
 const PageSavedMeals = () => {
-  const { favourites } = useFavourites();
+  const { favourites, toggleFavourite } = useFavourites();
   const [meals, setMeals] = useState<Meal[]>([]);
 
   // Fetch all saved meals simultaneously
@@ -34,7 +34,7 @@ const PageSavedMeals = () => {
 
       <div className="grid grid-cols-2 gap-4">
         {meals.map((meal) => (
-          <MealCard key={meal.idMeal} meal={meal} saved={true} handleClick={() => {}} />
+          <MealCard key={meal.idMeal} meal={meal} saved={true} handleClick={toggleFavourite} />
         ))}
       </div>
     </section>
