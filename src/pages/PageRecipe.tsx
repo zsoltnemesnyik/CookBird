@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeftIcon } from "lucide-react";
 import { getIngredients } from "@/lib/utils";
 import BackgroundLines from "@/components/layout/BackgroundLines";
-import AddToFavourites from "@/components/meals/AddToFavourites";
+import FavouriteTogglerIcon  from "@/components/meals/FavouriteTogglerIcon";
 import { useFavourites } from "@/lib/context/FavouritesContext";
 
 
@@ -131,7 +131,7 @@ const PageRecipe = () => {
                 ref={imgWrapperRef}
                 className="recipe-hero relative overflow-hidden"
             >
-                <AddToFavourites position="absolute" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
+                <FavouriteTogglerIcon  position="absolute" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
                 <img
                     src={`${meals[0].strMealThumb}/large`}
                     alt={meals[0].strMeal}

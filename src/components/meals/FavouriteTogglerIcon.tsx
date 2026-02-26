@@ -1,6 +1,6 @@
 import { HeartIcon } from "lucide-react";
 
-const AddToFavourites = ({
+const FavouriteTogglerIcon  = ({
     position,
     saved,
     handleClick,
@@ -19,4 +19,4 @@ const AddToFavourites = ({
         />
     );
 };
-export default AddToFavourites;
+export default FavouriteTogglerIcon ;

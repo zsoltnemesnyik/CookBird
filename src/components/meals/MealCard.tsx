@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { SINGLE_MEAL_PATH } from "../../lib/constants";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
-import AddToFavourites from "./AddToFavourites";
+import FavouriteTogglerIcon from "./FavouriteTogglerIcon";
 
 const MealCard = ({
   meal,
@@ -40,7 +40,7 @@ const MealCard = ({
             <ArrowRight className="ml-2" />
           </Link>
         </Button>
-        <AddToFavourites
+        <FavouriteTogglerIcon 
           saved={saved}
           handleClick={handleClick}
           id={meal.idMeal}
