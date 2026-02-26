@@ -3,7 +3,7 @@ import { useGSAP } from '@gsap/react';
 
 import { Link } from "react-router-dom"
 import { usePageScrolled } from '@/hooks/usePageScrolled';
-import { useFavourites } from '@/hooks/useFavourites';
+import { useFavourites } from '@/lib/context/FavouritesContext';
 
 const Header = () => {
   const { favourites } = useFavourites();

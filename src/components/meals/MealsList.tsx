@@ -1,7 +1,7 @@
+import { useFavourites } from "@/lib/context/FavouritesContext";
 import type { Meal } from "../../models/interfaces";
 import MealCard from "./MealCard";
 import { MealCardSkeleton } from "./MealCardSkeleton";
-import { useFavourites } from "../../hooks/useFavourites";
 
 type MealsListProps = {
   meals: Meal[];
@@ -12,15 +12,16 @@ type MealsListProps = {
 function MealsList({ meals, loading, error }: MealsListProps) {
   const { favourites, toggleFavourite } = useFavourites();
 
-  if (loading) return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {Array(12)
-        .fill(0)
-        .map((_, idx) => (
-          <MealCardSkeleton key={idx} />
-        ))}
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {Array(12)
+          .fill(0)
+          .map((_, idx) => (
+            <MealCardSkeleton key={idx} />
+          ))}
+      </div>
+    );
   if (error) return <p className="text-red-500">{error}</p>;
   if (meals.length === 0) return <p>No meals found.</p>;
 

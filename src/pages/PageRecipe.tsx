@@ -10,7 +10,8 @@ import { ArrowLeftIcon } from "lucide-react";
 import { getIngredients } from "@/lib/utils";
 import BackgroundLines from "@/components/layout/BackgroundLines";
 import AddToFavourites from "@/components/meals/AddToFavourites";
-import { useFavourites } from "@/hooks/useFavourites";
+import { useFavourites } from "@/lib/context/FavouritesContext";
+
 
 gsap.registerPlugin(Flip, SplitText);
 

@@ -1,6 +1,6 @@
 import MealCard from "@/components/meals/MealCard";
 import { Button } from "@/components/ui/button";
-import { useFavourites } from "@/hooks/useFavourites";
+import { useFavourites } from "@/lib/context/FavouritesContext";
 import type { Meal } from "@/models/interfaces";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";

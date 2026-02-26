@@ -40,7 +40,11 @@ const MealCard = ({
             <ArrowRight className="ml-2" />
           </Link>
         </Button>
-        <AddToFavourites saved={saved} handleClick={handleClick} id={meal.idMeal} />
+        <AddToFavourites
+          saved={saved}
+          handleClick={handleClick}
+          id={meal.idMeal}
+        />
       </div>
     </div>
   );
