@@ -131,7 +131,7 @@ const PageRecipe = () => {
                 ref={imgWrapperRef}
                 className="recipe-hero relative overflow-hidden"
             >
-                <FavouriteTogglerIcon  position="absolute" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
+                <FavouriteTogglerIcon  position="absolute" color="#FFFFFF" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
                 <img
                     src={`${meals[0].strMealThumb}/large`}
                     alt={meals[0].strMeal}

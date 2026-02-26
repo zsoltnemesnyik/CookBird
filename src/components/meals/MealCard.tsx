@@ -42,6 +42,7 @@ const MealCard = ({
         </Button>
         <FavouriteTogglerIcon 
           saved={saved}
+          color="#000000"
           handleClick={handleClick}
           id={meal.idMeal}
         />
