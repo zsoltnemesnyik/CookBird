@@ -1,5 +1,4 @@
-import useFetch from "../../hooks/useFetch";
-import type { CategoryApiResponse } from "../../models/interfaces";
+import { useCategories } from "@/hooks/useCategories";
 import CategoryLink from "./CategoryLink";
 
 const CategoryList = ({
@@ -9,12 +8,12 @@ const CategoryList = ({
   selectedCategory: string;
   setSelectedCategory: (categoryId: string) => void;
 }) => {
-  const { data, error, loading } = useFetch<CategoryApiResponse>(
-    `${import.meta.env.VITE_BASE_API}/categories.php`,
-  );
+  const { data, error, isLoading } = useCategories();
+
+  const loading = isLoading;
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (error) return <p className="text-red-500">{error.message}</p>;
   if (!data) return null;
 
   const categories = data.categories ?? [];

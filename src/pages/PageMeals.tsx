@@ -1,21 +1,29 @@
-import { useState } from "react";
-import useFetch from "../hooks/useFetch";
-import type { MealApiResponse } from "../models/interfaces";
+import { useEffect, useState } from "react";
 
 import MealsList from "../components/meals/MealsList";
 import Filters from "@/components/filter/Filters";
+import { useMeals } from "@/hooks/useMeals";
 
 const PageMeals = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Beef");
   const [searchName, setSearchName] = useState<string>("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  const endpoint = searchName.trim()
-    ? `${import.meta.env.VITE_BASE_API}/search.php?s=${searchName}`
-    : `${import.meta.env.VITE_BASE_API}/filter.php?c=${selectedCategory}`;
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(searchName);
+    }, 100);
 
-  const { data, error, loading } = useFetch<MealApiResponse>(endpoint);
+    return () => clearTimeout(timeout);
+  }, [searchName]);
+
+  const { data, error, isLoading } = useMeals(
+    selectedCategory,
+    debouncedSearch
+  );
 
   const meals = data?.meals ?? [];
+  const loading = isLoading;
 
   return (
     <>
@@ -29,7 +37,7 @@ const PageMeals = () => {
           setSearchName={setSearchName}
         />
 
-        <MealsList meals={meals} loading={loading} error={error} />
+        <MealsList meals={meals} loading={loading} error={error?.message || null} />
       </div>
     </>
   )
