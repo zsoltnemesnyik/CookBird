@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 
-import MealsList from "../components/meals/MealsList";
-import Filters from "@/components/filter/Filters";
 import { useMeals } from "@/hooks/useMeals";
+import MealsList from "@/components/meals/MealsList";
+import Filters from "@/components/filter/Filters";
 
 const PageMeals = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Beef");
   const [searchName, setSearchName] = useState<string>("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebouncedSearch(searchName);
-    }, 100);
-
+    const timeout = setTimeout(() => setDebouncedSearch(searchName), 100);
     return () => clearTimeout(timeout);
   }, [searchName]);
 
   const { data, error, isLoading } = useMeals(
     selectedCategory,
-    debouncedSearch
+    debouncedSearch,
   );
 
   const meals = data?.meals ?? [];
@@ -37,9 +35,16 @@ const PageMeals = () => {
           setSearchName={setSearchName}
         />
 
-        <MealsList meals={meals} loading={loading} error={error?.message || null} />
+        <MealsList
+          meals={meals}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          loading={loading}
+          error={error?.message || null}
+        />
       </div>
     </>
-  )
-}
-export default PageMeals
+  );
+};
+
+export default PageMeals;
