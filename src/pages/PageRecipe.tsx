@@ -3,8 +3,7 @@ import { Flip, SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import type { MealApiResponse } from "../models/interfaces";
+import { useMealSingle } from "@/hooks/useMealSingle";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftIcon } from "lucide-react";
 import { getIngredients } from "@/lib/utils";
@@ -25,9 +24,8 @@ const PageRecipe = () => {
     const titleRef = useRef<HTMLHeadingElement | null>(null);
     const descRef = useRef<HTMLParagraphElement | null>(null);
 
-    const { data, error, loading } = useFetch<MealApiResponse>(
-        `${import.meta.env.VITE_BASE_API}/lookup.php?i=${id}`
-    );
+    const { data, error, isLoading } = useMealSingle(id as string);
+    const loading = isLoading;
 
     const meals = data?.meals ?? [];
 
@@ -116,7 +114,7 @@ const PageRecipe = () => {
     );
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p className="text-red-500">{error}</p>;
+    if (error) return <p className="text-red-500">{error.message}</p>;
     if (meals.length === 0) return <p>No single meal found.</p>;
 
     return (
