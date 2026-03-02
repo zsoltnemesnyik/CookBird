@@ -24,7 +24,7 @@ const FavouritesCountBadge = ({ count }: { count: number }) => {
   return (
     <span
       ref={badgeRef}
-      className="absolute bottom-[calc(100%-10px)] right-[-15%] text-xs bg-black text-white w-5 h-5 flex justify-center items-center aspect-square rounded-full"
+      className="absolute bottom-[calc(100%-10px)] right-[-15%] text-xs bg-accent text-white font-medium w-5 h-5 flex justify-center items-center aspect-square rounded-full"
     >
       {count}
     </span>

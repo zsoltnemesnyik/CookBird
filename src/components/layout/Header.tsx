@@ -24,8 +24,11 @@ const Header = () => {
       className={`fixed w-full top-0 z-20 transition-colors duration-400 ${isScrolled ? "bg-black/15 backdrop-blur-md" : ""}`}
     >
       <div className="container mx-auto px-5 py-3 flex justify-between items-center">
-        <Link to="/" className="text-2xl">
-          <span className={`${isScrolled ? "text-white" : ""}`}>COOKBIRD</span>
+        <Link to="/" className={`text-2xl text-[#0e2642] font-extrabold hover:opacity-50 transition-all duration-300 ${isScrolled ? "text-white " : ""} flex items-center gap-2.5`}>
+          <img src="/favicon.png" alt="logo image" className="size-9" />
+          <h3>
+            Cook<span className="text-accent">bird</span>
+          </h3>
         </Link>
         <nav>
           <ul
