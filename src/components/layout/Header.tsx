@@ -1,0 +1,49 @@
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+import { Link } from "react-router-dom";
+import { usePageScrolled } from "@/hooks/usePageScrolled";
+import { useFavourites } from "@/lib/context/FavouritesContext";
+import FavouritesCountBadge from "../meals/FavouritesCountBadge";
+
+const Header = () => {
+  const { favourites } = useFavourites();
+  const isScrolled = usePageScrolled();
+
+  useGSAP(() => {
+    gsap.from("header", {
+      opacity: 0,
+      duration: 0.5,
+      delay: 1.25,
+      ease: "power2.in",
+    });
+  });
+
+  return (
+    <header
+      className={`fixed w-full top-0 z-20 transition-colors duration-400 ${isScrolled ? "bg-black/15 backdrop-blur-md" : ""}`}
+    >
+      <div className="container mx-auto px-5 py-3 flex justify-between items-center">
+        <Link to="/" className={`text-2xl text-[#0e2642] font-extrabold hover:opacity-50 transition-all duration-300 ${isScrolled ? "text-white " : ""} flex items-center gap-2.5`}>
+          <img src="/favicon.png" alt="logo image" className="size-9" />
+          <h3>
+            Cook<span className="text-accent">bird</span>
+          </h3>
+        </Link>
+        <nav>
+          <ul
+            className={`flex gap-5 transition-colors duration-400 ${isScrolled ? "text-white" : ""}`}
+          >
+            <li className="relative">
+              <Link to="/favourites">
+                <span>Favourites</span>
+                {favourites.length > 0 && <FavouritesCountBadge count={favourites.length} />}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+};
+export default Header;
