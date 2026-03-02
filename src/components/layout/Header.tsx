@@ -25,7 +25,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-5 py-3 flex justify-between items-center">
         <Link to="/" className="text-2xl">
-          <span>COOKBIRD</span>
+          <span className={`${isScrolled ? "text-white" : ""}`}>COOKBIRD</span>
         </Link>
         <nav>
           <ul
