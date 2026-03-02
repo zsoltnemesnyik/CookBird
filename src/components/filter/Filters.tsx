@@ -13,7 +13,7 @@ const Filters = ({
   setSearchName: (name: string) => void;
 }) => {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="max-sm:text-center flex flex-col gap-5">
       <div>
         <h3 className="text-lg font-bold">Search by name</h3>
         <SearchInput

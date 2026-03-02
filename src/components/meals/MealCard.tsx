@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { SINGLE_MEAL_PATH } from "../../lib/constants";
 import type { Meal } from "../../models/interfaces";
 import { Link } from "react-router-dom";
-import { SINGLE_MEAL_PATH } from "../../lib/constants";
-import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { ArrowRight } from "lucide-react";
 import FavouriteTogglerIcon from "./FavouriteTogglerIcon";
 
 const MealCard = ({
@@ -18,17 +18,14 @@ const MealCard = ({
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div className="h-full flex flex-col gap-2">
-      {/* Skeleton / Placeholder */}
-      {/* {!imgLoaded && <div className="bg-black/15 h-32 w-full animate-pulse" />} */}
-
-      {/* Lazy-load kép + Blur + Fade-in */}
+    <div className="shadow-lg rounded-lg p-2 pb-3 h-full flex flex-col gap-2">
+      {/* Lazy-load image + Blur + Fade-in */}
       <img
         src={`${meal.strMealThumb}/small`}
         alt={meal.strMeal}
         loading="lazy"
         onLoad={() => setImgLoaded(true)}
-        className={`w-full h-32 object-cover rounded transition-all duration-500 ease-out
+        className={`max-sm:h-auto  max-sm:aspect-4/3 w-full h-32 object-cover rounded-sm transition-all duration-500 ease-out
           ${imgLoaded ? "opacity-100 blur-0" : "opacity-0 blur-md"}`}
       />
 
@@ -40,7 +37,7 @@ const MealCard = ({
             <ArrowRight className="ml-2" />
           </Link>
         </Button>
-        <FavouriteTogglerIcon 
+        <FavouriteTogglerIcon
           saved={saved}
           color="#000000"
           handleClick={handleClick}

@@ -32,11 +32,8 @@ const Header = () => {
         </Link>
         <nav>
           <ul
-            className={`flex max-md:flex-col gap-5 transition-colors duration-400 ${isScrolled ? "text-white" : ""}`}
+            className={`flex gap-5 transition-colors duration-400 ${isScrolled ? "text-white" : ""}`}
           >
-            <li>
-              <Link to="/">Home</Link>
-            </li>
             <li className="relative">
               <Link to="/favourites">
                 <span>Favourites</span>

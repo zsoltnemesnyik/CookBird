@@ -21,7 +21,7 @@ const CategoryList = ({
   if (categories.length === 0) return <p>No categories found.</p>;
 
   return (
-    <div className="flex flex-col items-start">
+    <div className="max-sm:justify-center flex-row flex-wrap flex sm:flex-col items-start">
       {categories
         .sort((a, b) => a.strCategory.localeCompare(b.strCategory))
         .map((category) => (
