@@ -22,15 +22,18 @@ const CategoryList = ({
 
   return (
     <div className="flex flex-col items-start">
-      {categories.map((category) => (
-        <CategoryLink
-          key={category.idCategory}
-          category={category}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      ))}
+      {categories
+        .sort((a, b) => a.strCategory.localeCompare(b.strCategory))
+        .map((category) => (
+          <CategoryLink
+            key={category.idCategory}
+            category={category}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+        ))}
     </div>
   );
 };
+
 export default CategoryList;
