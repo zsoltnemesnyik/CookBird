@@ -31,10 +31,10 @@ const MealCard = ({
 
       <h2 className="grow font-bold text-lg mb-5">{meal.strMeal}</h2>
       <div className="flex items-center justify-between">
-        <Button asChild size={"xs"}>
+        <Button asChild size={"xs"} className="group">
           <Link to={`/${SINGLE_MEAL_PATH}/${meal.idMeal}`}>
             View Recipe
-            <ArrowRight className="ml-2" />
+            <ArrowRight className="ml-2 group-hover:-translate-x-1 transition-all" />
           </Link>
         </Button>
         <FavouriteTogglerIcon
