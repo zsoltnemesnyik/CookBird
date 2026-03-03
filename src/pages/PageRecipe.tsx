@@ -90,6 +90,7 @@ const PageRecipe = () => {
                     duration: 1.5,
                     ease: "elastic.out(1, 0.3)"
                 },
+                "-=.5"
             )
 
             // Title animáció
@@ -140,7 +141,9 @@ const PageRecipe = () => {
                 ref={imgWrapperRef}
                 className="recipe-hero relative overflow-hidden"
             >
-                <FavouriteTogglerIcon ref={favIconRef} position="absolute" color="#FFFFFF" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
+                {imgLoaded && 
+                    <FavouriteTogglerIcon ref={favIconRef} position="absolute" color="#FFFFFF" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
+                }
                 <img
                     src={`${meals[0].strMealThumb}/large`}
                     alt={meals[0].strMeal}
