@@ -23,6 +23,7 @@ const PageRecipe = () => {
     const imgWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLHeadingElement | null>(null);
     const descRef = useRef<HTMLParagraphElement | null>(null);
+    const favIconRef = useRef<SVGSVGElement | null>(null);
 
     const { data, error, isLoading } = useMealSingle(id as string);
     const loading = isLoading;
@@ -57,6 +58,7 @@ const PageRecipe = () => {
             });
 
             // Title kezdőállapot timeline-on belül - a timeline elejére
+            tl.set(favIconRef.current, { opacity: 0, yPercent: 100 });
             tl.set(titleRef.current, { visibility: "visible" });
             tl.set(split.chars, { y: 30, opacity: 0 });
 
@@ -80,6 +82,15 @@ const PageRecipe = () => {
                 "-=1.2"
             );
 
+            tl.to(
+                favIconRef.current,
+                {
+                    opacity: 1,
+                    yPercent: 0,
+                    duration: 1.5,
+                    ease: "elastic.out(1, 0.3)"
+                },
+            )
 
             // Title animáció
             tl.to(
@@ -103,7 +114,7 @@ const PageRecipe = () => {
                     duration: 0.3,
                     ease: "power2.out"
                 },
-                "-=0.1"
+                "-=100%"
             );
 
             return () => {
@@ -129,7 +140,7 @@ const PageRecipe = () => {
                 ref={imgWrapperRef}
                 className="recipe-hero relative overflow-hidden"
             >
-                <FavouriteTogglerIcon  position="absolute" color="#FFFFFF" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
+                <FavouriteTogglerIcon ref={favIconRef} position="absolute" color="#FFFFFF" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
                 <img
                     src={`${meals[0].strMealThumb}/large`}
                     alt={meals[0].strMeal}
