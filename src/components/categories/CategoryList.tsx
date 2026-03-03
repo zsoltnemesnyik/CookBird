@@ -2,9 +2,11 @@ import { useCategories } from "@/hooks/useCategories";
 import CategoryLink from "./CategoryLink";
 
 const CategoryList = ({
+  disabled,
   selectedCategory,
   setSelectedCategory,
 }: {
+  disabled: boolean;
   selectedCategory: string;
   setSelectedCategory: (categoryId: string) => void;
 }) => {
@@ -21,7 +23,9 @@ const CategoryList = ({
   if (categories.length === 0) return <p>No categories found.</p>;
 
   return (
-    <div className="max-sm:justify-center flex-row flex-wrap flex sm:flex-col items-start">
+    <div
+      className={`max-sm:justify-center flex-row flex-wrap flex sm:flex-col items-start transition-opacity ${disabled ? "pointer-events-none opacity-15" : ""}`}
+    >
       {categories
         .sort((a, b) => a.strCategory.localeCompare(b.strCategory))
         .map((category) => (
