@@ -134,17 +134,6 @@ export default function PageLoader() {
       ref={containerRef}
       className="page-loader fixed inset-0 bg-background overflow-hidden z-9999 leading-none"
     >
-      {/* bottom felirat */}
-      <div className="absolute inset-0 flex items-end justify-center">
-        <h1
-          ref={bottomRef}
-          className="text-black text-[12vw] font-bold leading-none select-none"
-        >
-          Cookbird
-        </h1>
-      </div>
-
-      {/* top felirat */}
       <div className="absolute inset-0 flex items-start justify-center">
         <h1
           ref={topRef}
@@ -155,6 +144,14 @@ export default function PageLoader() {
         <div className="h-[150vh] w-full absolute top-0 flex items-center justify-center">
           <AnimatedIcon ref={iconRef} />
         </div>
+      </div>
+      <div className="absolute inset-0 flex items-end justify-center">
+        <h1
+          ref={bottomRef}
+          className="text-black text-[12vw] font-bold leading-none select-none"
+        >
+          Cookbird
+        </h1>
       </div>
     </div>
   );

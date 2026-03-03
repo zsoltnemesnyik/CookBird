@@ -90,7 +90,7 @@ const PageRecipe = () => {
                     duration: 1.5,
                     ease: "elastic.out(1, 0.3)"
                 },
-                "-=.5"
+                "-=.4"
             )
 
             // Title animáció
