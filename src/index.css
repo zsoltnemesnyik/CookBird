@@ -209,6 +209,7 @@ body {
   display: flex;
   
   div {
+    font-size: clamp(50px, calc(150vw / 8), 250px);
     line-height: .8;
   }
 }

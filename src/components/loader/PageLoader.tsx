@@ -137,9 +137,9 @@ export default function PageLoader() {
       <div className="absolute inset-0 flex items-start justify-center">
         <h1
           ref={topRef}
-          className="text-black text-[12vw] font-bold leading-none select-none"
+          className="text-black text-[12vw] font-bold select-none"
         >
-          Cookbird
+          COOKBIRD
         </h1>
         <div className="h-[150vh] w-full absolute top-0 flex items-center justify-center">
           <AnimatedIcon ref={iconRef} />
@@ -148,9 +148,9 @@ export default function PageLoader() {
       <div className="absolute inset-0 flex items-end justify-center">
         <h1
           ref={bottomRef}
-          className="text-black text-[12vw] font-bold leading-none select-none"
+          className="text-black text-[12vw] font-bold select-none"
         >
-          Cookbird
+          COOKBIRD
         </h1>
       </div>
     </div>
