@@ -41,7 +41,7 @@ function MealsList({ meals, currentPage, setCurrentPage, loading, error }: Meals
     );
 
   if (error) return <p className="text-red-500">{error}</p>;
-  if (meals.length === 0) return <p>No meals found.</p>;
+  if (meals.length === 0) return (<div className="flex items-center justify-center text-center size-full"><p className="text-red-500 font-bold">No meals found.</p></div>);
 
   return (
     <div className="flex flex-col items-center gap-20">

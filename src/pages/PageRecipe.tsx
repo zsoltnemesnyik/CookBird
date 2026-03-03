@@ -57,12 +57,12 @@ const PageRecipe = () => {
                 defaults: { ease: "power3.out" }
             });
 
-            // Title kezdőállapot timeline-on belül - a timeline elejére
+            // title initial state
             tl.set(favIconRef.current, { opacity: 0, yPercent: 100 });
             tl.set(titleRef.current, { visibility: "visible" });
             tl.set(split.chars, { y: 30, opacity: 0 });
 
-            // Border radius animáció
+            // Border radius animation
             tl.to(
                 element,
                 {
@@ -72,7 +72,7 @@ const PageRecipe = () => {
                 },
             );
             
-            // Hero visszaanimálás fixed → layout
+            // Hero reverse animation - fixed → layout
             tl.add(
                 Flip.from(state, {
                     duration: 1,
@@ -93,7 +93,7 @@ const PageRecipe = () => {
                 "-=.4"
             )
 
-            // Title animáció
+            // Title animation
             tl.to(
                 split.chars,
                 {
@@ -160,7 +160,7 @@ const PageRecipe = () => {
                 ref={descRef}
                 className="flex flex-col gap-8 invisible opacity-0"
             >
-                <div className="flex gap-8">
+                <div className="flex max-md:flex-col gap-8">
                     <div className="flex-2">
                         <h2 className="text-xl font-medium mb-3">Instructions</h2>
                         <p>
@@ -178,7 +178,7 @@ const PageRecipe = () => {
                         </ul>
                     </div>
                 </div>
-                <Button className="self-center" asChild>
+                <Button className="self-center" size={"lg"} asChild>
                     <Link to="/">
                         <ArrowLeftIcon />
                         Back to Home

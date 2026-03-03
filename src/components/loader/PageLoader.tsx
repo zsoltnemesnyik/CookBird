@@ -40,7 +40,7 @@ export default function PageLoader() {
 
       const tl = gsap.timeline();
 
-      // --- bottom felirat felnyit ---
+      // --- bottom title opening ---
       tl.to(splitBottom.chars, {
         scaleY: bottomScale,
         duration: 0.75,
@@ -65,17 +65,17 @@ export default function PageLoader() {
         stagger: { amount: 0.5, from: "random" },
       });
 
-      // --- IKON + GŐZÖK ---
+      // --- ICON + STEAM ---
       const steamWaves = iconRef.current.querySelectorAll(".steamwaves");
 
-      // ikon fade-in
+      // icon fade-in
       tl.to(
         iconRef.current,
         { opacity: 1, duration: 1.3, ease: "power3.out" },
         "<0.5",
       );
 
-      // steam megjelenés animáció
+      // steam entrance animation
       tl.fromTo(
         steamWaves,
         { y: 48, opacity: 0, scale: 0.75, transformOrigin: "center bottom" },
@@ -90,7 +90,7 @@ export default function PageLoader() {
         "<0.2",
       );
 
-      // folyamatos hullámzás
+      // constant waving
       gsap.to(steamWaves, {
         keyframes: [
           {

@@ -6,7 +6,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-// 
 export const getIngredients = (meal: Meal) => {
   return Array.from({ length: 20 }, (_, i) => {
     const num = i + 1;
