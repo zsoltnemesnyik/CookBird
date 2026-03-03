@@ -40,7 +40,7 @@ const PageSavedMeals = () => {
           </Button>
         </>
       ) : (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="meal-list">
           {meals.map((meal) => (
             <MealCard key={meal.idMeal} meal={meal} saved={true} handleClick={toggleFavourite} />
           ))}

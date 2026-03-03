@@ -31,7 +31,7 @@ function MealsList({ meals, currentPage, setCurrentPage, loading, error }: Meals
 
   if (loading)
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="meal-list">
         {Array(ITEMS_PER_PAGE)
           .fill(0)
           .map((_, idx) => (
@@ -45,7 +45,7 @@ function MealsList({ meals, currentPage, setCurrentPage, loading, error }: Meals
 
   return (
     <div className="flex flex-col items-center gap-20">
-      <div className="w-full grid max-sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.75">
+      <div className="meal-list">
         {paginatedMeals.map((meal) => (
           <MealCard
             key={meal.idMeal}
