@@ -1,4 +1,4 @@
-const commonClasses = "cursor-pointertransition-all disabled:opacity-10 disabled:cursor-not-allowed px-3 py-2 text-black";
+const commonClasses = "cursor-pointer transition-all disabled:opacity-10 disabled:cursor-not-allowed px-3 py-2 text-black";
 
 const Pagination = ({
     currentPage,
