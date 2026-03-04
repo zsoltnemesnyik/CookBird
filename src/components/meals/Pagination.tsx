@@ -17,7 +17,7 @@ export const Pagination = ({
     const visiblePages = getVisiblePages(currentPage, totalPages);
 
     return (
-        <div className="pagination-container flex items-center rounded-full overflow-hidden">
+        <div className="pagination-container flex items-center rounded-full overflow-hidden text-sm md:text-base">
             <button
                 className={commonClasses}
                 disabled={currentPage === 1}
@@ -34,7 +34,7 @@ export const Pagination = ({
                 ) : (
                     <button
                         key={page}
-                        className={`px-3 py-2 cursor-pointer ${page === currentPage
+                        className={`px-2 sm:px-3 py-2 cursor-pointer ${page === currentPage
                             ? "text-black font-black"
                             : "text-black/30"
                             }`}
