@@ -3,7 +3,7 @@ import { useFavourites } from "@/lib/context/FavouritesContext";
 import type { Meal } from "../../models/interfaces";
 import MealCard from "./MealCard";
 import { MealCardSkeleton } from "./MealCardSkeleton";
-import Pagination from "./Pagination";
+import { Pagination } from "./Pagination";
 import { ITEMS_PER_PAGE } from "@/lib/constants";
 
 type MealsListProps = {
