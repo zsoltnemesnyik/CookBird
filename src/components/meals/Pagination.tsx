@@ -12,7 +12,7 @@ export const Pagination = ({
     if (totalPages <= 1) return null;
 
     const commonClasses =
-        "cursor-pointer transition-all disabled:opacity-10 bg-black/60 disabled:cursor-not-allowed px-3 py-2 text-white";
+        "cursor-pointer transition-all disabled:opacity-10 disabled:cursor-not-allowed px-3 py-2 text-black";
 
     const visiblePages = getVisiblePages(currentPage, totalPages);
 

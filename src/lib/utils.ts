@@ -23,41 +23,40 @@ export const getIngredients = (meal: Meal) => {
   }).filter(Boolean) as { ingredient: string; measure: string }[];
 };
 
-export const getVisiblePages = (currentPage: number, totalPages: number) => {
+export const getVisiblePages = (
+  currentPage: number,
+  totalPages: number
+) => {
   const pages: (number | "dots")[] = [];
 
   const start = Math.max(currentPage - 1, 1);
   const end = Math.min(currentPage + 1, totalPages);
 
-  // First 2 pages
-  for (let i = 1; i <= Math.min(2, totalPages); i++) {
-    pages.push(i);
+  // First page
+  if (totalPages >= 1) {
+    pages.push(1);
   }
 
-  // Dots on the left
-  if (start > 3) {
+  // Left dots
+  if (start > 2) {
     pages.push("dots");
   }
 
   // Middle range
   for (let i = start; i <= end; i++) {
-    if (i > 2 && i < totalPages - 1) {
+    if (i > 1 && i < totalPages) {
       pages.push(i);
     }
   }
 
-  // Jobb oldali dots
-  if (end < totalPages - 2) {
+  // Right dots
+  if (end < totalPages - 1) {
     pages.push("dots");
   }
 
-  // Utolsó 2 oldal
-  for (
-    let i = Math.max(totalPages - 1, 3);
-    i <= totalPages;
-    i++
-  ) {
-    pages.push(i);
+  // Last page
+  if (totalPages > 1) {
+    pages.push(totalPages);
   }
 
   return pages;
