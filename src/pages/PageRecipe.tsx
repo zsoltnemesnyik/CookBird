@@ -23,6 +23,7 @@ const PageRecipe = () => {
     const imgWrapperRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLHeadingElement | null>(null);
     const descRef = useRef<HTMLParagraphElement | null>(null);
+    const favIconRef = useRef<SVGSVGElement | null>(null);
 
     const { data, error, isLoading } = useMealSingle(id as string);
     const loading = isLoading;
@@ -56,11 +57,12 @@ const PageRecipe = () => {
                 defaults: { ease: "power3.out" }
             });
 
-            // Title kezdőállapot timeline-on belül - a timeline elejére
+            // title initial state
+            tl.set(favIconRef.current, { opacity: 0, yPercent: 100 });
             tl.set(titleRef.current, { visibility: "visible" });
             tl.set(split.chars, { y: 30, opacity: 0 });
 
-            // Border radius animáció
+            // Border radius animation
             tl.to(
                 element,
                 {
@@ -70,7 +72,7 @@ const PageRecipe = () => {
                 },
             );
             
-            // Hero visszaanimálás fixed → layout
+            // Hero reverse animation - fixed → layout
             tl.add(
                 Flip.from(state, {
                     duration: 1,
@@ -80,8 +82,18 @@ const PageRecipe = () => {
                 "-=1.2"
             );
 
+            tl.to(
+                favIconRef.current,
+                {
+                    opacity: 1,
+                    yPercent: 0,
+                    duration: 1.5,
+                    ease: "elastic.out(1, 0.3)"
+                },
+                "-=.4"
+            )
 
-            // Title animáció
+            // Title animation
             tl.to(
                 split.chars,
                 {
@@ -103,7 +115,7 @@ const PageRecipe = () => {
                     duration: 0.3,
                     ease: "power2.out"
                 },
-                "-=0.1"
+                "-=100%"
             );
 
             return () => {
@@ -129,7 +141,9 @@ const PageRecipe = () => {
                 ref={imgWrapperRef}
                 className="recipe-hero relative overflow-hidden"
             >
-                <FavouriteTogglerIcon  position="absolute" color="#FFFFFF" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
+                {imgLoaded && 
+                    <FavouriteTogglerIcon ref={favIconRef} position="absolute" color="#FFFFFF" saved={favourites.includes(meals[0].idMeal)} handleClick={toggleFavourite} id={meals[0].idMeal} />
+                }
                 <img
                     src={`${meals[0].strMealThumb}/large`}
                     alt={meals[0].strMeal}
@@ -146,7 +160,7 @@ const PageRecipe = () => {
                 ref={descRef}
                 className="flex flex-col gap-8 invisible opacity-0"
             >
-                <div className="flex gap-8">
+                <div className="flex max-md:flex-col gap-8">
                     <div className="flex-2">
                         <h2 className="text-xl font-medium mb-3">Instructions</h2>
                         <p>
@@ -164,7 +178,7 @@ const PageRecipe = () => {
                         </ul>
                     </div>
                 </div>
-                <Button className="self-center" asChild>
+                <Button className="self-center" size={"lg"} asChild>
                     <Link to="/">
                         <ArrowLeftIcon />
                         Back to Home

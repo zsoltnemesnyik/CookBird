@@ -17,6 +17,6 @@ export function useCategories() {
   return useQuery<CategoryApiResponse, Error>({
     queryKey: ["categories"],
     queryFn: fetchCategories,
-    staleTime: 1000 * 60 * 60, // 1 óra (ritkán változik)
+    staleTime: 1000 * 60 * 60,
   });
 }

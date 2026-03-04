@@ -10,7 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
-  --background: oklch(90.7% 0.0999 101.333 / 35%);
+  --background: oklch(0.97 0.04 100.04);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -198,4 +198,18 @@ body {
     transparent,
     rgba(255, 255, 255, 0.3)
   );
+}
+
+.meal-list {
+  @apply w-full grid max-sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.75;
+}
+
+.page-loader h1 {
+  position: relative;
+  display: flex;
+  
+  div {
+    font-size: clamp(50px, calc(150vw / 8), 250px);
+    line-height: .8;
+  }
 }

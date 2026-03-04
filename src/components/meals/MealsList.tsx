@@ -3,7 +3,7 @@ import { useFavourites } from "@/lib/context/FavouritesContext";
 import type { Meal } from "../../models/interfaces";
 import MealCard from "./MealCard";
 import { MealCardSkeleton } from "./MealCardSkeleton";
-import Pagination from "./Pagination";
+import { Pagination } from "./Pagination";
 import { ITEMS_PER_PAGE } from "@/lib/constants";
 
 type MealsListProps = {
@@ -31,7 +31,7 @@ function MealsList({ meals, currentPage, setCurrentPage, loading, error }: Meals
 
   if (loading)
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="meal-list">
         {Array(ITEMS_PER_PAGE)
           .fill(0)
           .map((_, idx) => (
@@ -41,11 +41,11 @@ function MealsList({ meals, currentPage, setCurrentPage, loading, error }: Meals
     );
 
   if (error) return <p className="text-red-500">{error}</p>;
-  if (meals.length === 0) return <p>No meals found.</p>;
+  if (meals.length === 0) return (<div className="flex items-center justify-center text-center size-full"><p className="text-red-500 font-bold">No meals found.</p></div>);
 
   return (
     <div className="flex flex-col items-center gap-20">
-      <div className="grid max-sm:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[15px]">
+      <div className="meal-list">
         {paginatedMeals.map((meal) => (
           <MealCard
             key={meal.idMeal}

@@ -24,7 +24,8 @@ const Filters = ({
       <div>
         <h3 className="text-lg font-bold">Categories</h3>
         <CategoryList
-          selectedCategory={selectedCategory}
+          disabled={searchName !== ""}
+          selectedCategory={searchName !== "" ? "" : selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
       </div>

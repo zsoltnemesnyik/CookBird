@@ -1,4 +1,6 @@
-const Pagination = ({
+import { getVisiblePages } from "@/lib/utils";
+
+export const Pagination = ({
     currentPage,
     totalPages,
     onPageChange,
@@ -9,33 +11,42 @@ const Pagination = ({
 }) => {
     if (totalPages <= 1) return null;
 
-    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+    const commonClasses =
+        "cursor-pointer transition-all disabled:opacity-10 disabled:cursor-not-allowed px-3 py-2 text-black";
+
+    const visiblePages = getVisiblePages(currentPage, totalPages);
 
     return (
-        <div className="pagination-container flex items-center bg-black/15 backdrop-blur-md rounded-full overflow-hidden">
+        <div className="pagination-container flex items-center rounded-full overflow-hidden text-sm md:text-base">
             <button
-                className="px-3 py-2 bg-black text-white disabled:bg-transparent disabled:text-black/10 disabled:cursor-not-allowed"
+                className={commonClasses}
                 disabled={currentPage === 1}
                 onClick={() => onPageChange(currentPage - 1)}
             >
                 Prev
             </button>
 
-            {pages.map((page) => (
-                <button
-                    key={page}
-                    className={`px-3 py-2 cursor-pointer  ${page === currentPage
-                        ? "text-black"
-                        : "text-black/50"
-                        }`}
-                    onClick={() => onPageChange(page)}
-                >
-                    {page}
-                </button>
-            ))}
+            {visiblePages.map((page, index) =>
+                page === "dots" ? (
+                    <span key={`dots-${index}`} className="px-3 py-2 text-black/40">
+                        ...
+                    </span>
+                ) : (
+                    <button
+                        key={page}
+                        className={`px-2 sm:px-3 py-2 cursor-pointer ${page === currentPage
+                            ? "text-black font-black"
+                            : "text-black/30"
+                            }`}
+                        onClick={() => onPageChange(page)}
+                    >
+                        {page}
+                    </button>
+                )
+            )}
 
             <button
-                className="px-3 py-2 bg-black/5 text-black disabled:opacity-20"
+                className={commonClasses}
                 disabled={currentPage === totalPages}
                 onClick={() => onPageChange(currentPage + 1)}
             >
@@ -44,5 +55,3 @@ const Pagination = ({
         </div>
     );
 };
-
-export default Pagination;

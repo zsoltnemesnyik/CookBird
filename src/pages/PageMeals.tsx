@@ -11,7 +11,7 @@ const PageMeals = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setDebouncedSearch(searchName), 100);
+    const timeout = setTimeout(() => setDebouncedSearch(searchName), 300);
     return () => clearTimeout(timeout);
   }, [searchName]);
 
@@ -27,7 +27,7 @@ const PageMeals = () => {
     <>
       <h1 className="text-3xl font-bold mb-6 text-center">Meals</h1>
 
-      <div className="grid sm:grid-cols-[minmax(200px,1fr)_3fr] gap-8 items-start">
+      <div className="w-full grid sm:grid-cols-[minmax(200px,1fr)_3fr] gap-8 items-start">
         <Filters
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}

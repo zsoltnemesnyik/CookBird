@@ -7,7 +7,7 @@ export interface Meal {
   strMealThumb: string;
   strTags: string | null;
   strYoutube: string | null;
-  [key: string]: string | null; // ingredients + measures miatt
+  [key: string]: string | null;
 }
 
 export interface Category {
