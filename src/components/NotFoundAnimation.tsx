@@ -54,9 +54,9 @@ const NotFoundAnimation = () => {
 
         const bgClass = isWord
           ? showLetters
-            ? "bg-black"
-            : "bg-black/10"
-          : "bg-black/10"
+            ? "bg-accent"
+            : "bg-accent/30"
+          : "bg-accent/30"
 
         return (
           <span
