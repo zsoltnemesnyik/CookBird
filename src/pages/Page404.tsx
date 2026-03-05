@@ -1,4 +1,4 @@
-import NotFoundAnimation from "@/components/404/notFoundAnimation";
+import NotFoundAnimation from "@/components/NotFoundAnimation";
 
 const Page404 = () => {
     return (
