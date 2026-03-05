@@ -4,6 +4,7 @@ import PageMeals from "./pages/PageMeals";
 import PageRecipe from "./pages/PageRecipe";
 import PageSavedMeals from "./pages/PageSavedMeals";
 import PageLoader from "./components/loader/PageLoader";
+import Page404 from "./pages/Page404";
 
 function App() {
   return (
@@ -11,11 +12,12 @@ function App() {
       <PageLoader />
       <BrowserRouter>
         <Header />
-        <main className="container mx-auto p-4 py-20 relative z-10">
+        <main className="min-h-screen flex flex-col container mx-auto p-4 py-20 relative z-10">
           <Routes>
             <Route path="/" element={<PageMeals />} />
             <Route path={`/meal/:id`} element={<PageRecipe />} />
             <Route path={`/favourites`} element={<PageSavedMeals />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </main>
       </BrowserRouter>
