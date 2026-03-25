@@ -46,7 +46,7 @@ const PageRecipe = () => {
 
             // ---- TITLE SPLIT ----
             const split = SplitText.create(titleRef.current, {
-                type: "chars"
+                type: "words, chars"
             });
 
             // ---- FLIP ----
