@@ -112,7 +112,7 @@ const PageRecipe = () => {
                 {   
                     opacity: 1,
                     visibility: "visible",
-                    duration: 0.3,
+                    duration: 0.5,
                     ease: "power2.out"
                 },
                 "-=100%"

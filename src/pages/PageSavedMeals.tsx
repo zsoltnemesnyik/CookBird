@@ -18,8 +18,8 @@ const PageSavedMeals = () => {
         favourites.map((id) =>
           fetch(`${import.meta.env.VITE_BASE_API}/lookup.php?i=${id}`)
             .then((res) => res.json())
-            .then((data) => data.meals[0])
-        )
+            .then((data) => data.meals[0]),
+        ),
       );
 
       setMeals(results);
@@ -31,9 +31,7 @@ const PageSavedMeals = () => {
 
   return (
     <section className="flex flex-col gap-8 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Saved Meals
-      </h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Saved Meals</h1>
 
       {loading ? (
         <p className="text-center">Loading...</p>
@@ -47,11 +45,15 @@ const PageSavedMeals = () => {
       ) : (
         <div className="meal-list">
           {meals.map((meal) => (
-            <MealCard key={meal.idMeal} meal={meal} saved={true} handleClick={toggleFavourite} />
+            <MealCard
+              key={meal.idMeal}
+              meal={meal}
+              saved={true}
+              handleClick={toggleFavourite}
+            />
           ))}
         </div>
       )}
-
     </section>
   );
 };

@@ -6,76 +6,72 @@ import AnimatedIcon from "./AnimatedIcon";
 
 gsap.registerPlugin(SplitText);
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
 export default function PageLoader() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLHeadingElement>(null);
-  const topRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
   const iconRef = useRef<SVGSVGElement>(null);
 
   useGSAP(
     () => {
-      if (
-        !bottomRef.current ||
-        !topRef.current ||
-        !containerRef.current ||
-        !iconRef.current
-      )
-        return;
+      if (!textRef.current || !containerRef.current || !iconRef.current) return;
 
-      const splitBottom = SplitText.create(bottomRef.current, {
-        type: "chars",
+      const splitText = SplitText.create(textRef.current, { type: "chars" });
+
+      gsap.set(splitText.chars, {
+        scaleY: 1,
+        transformOrigin: "center bottom",
       });
-      const splitTop = SplitText.create(topRef.current, { type: "chars" });
-
-      gsap.set(splitBottom.chars, { scaleY: 1, transformOrigin: "bottom" });
-      gsap.set(splitTop.chars, { transformOrigin: "top" });
-      gsap.set(topRef.current, { opacity: 0 });
       gsap.set(iconRef.current, { opacity: 0 });
 
-      const vh = window.innerHeight;
-      const bottomHeight = bottomRef.current.offsetHeight;
-      const topHeight = topRef.current.offsetHeight;
-      const bottomScale = vh / bottomHeight;
-      const topScale = vh / topHeight;
+      gsap.set(containerRef.current, {
+        alignItems: "flex-end",
+        paddingBottom: isMobile ? "25vh" : 0,
+      });
+
+      const vh = window.visualViewport?.height || window.innerHeight;
+      const textHeight = textRef.current.offsetHeight;
+      const effectiveVh = isMobile ? vh * 0.5 : vh;
+      const scale = effectiveVh / textHeight;
 
       const tl = gsap.timeline();
 
-      // --- bottom title opening ---
-      tl.to(splitBottom.chars, {
-        scaleY: bottomScale,
-        duration: 0.75,
+      // --- 1. Felirat nyújtása ---
+      tl.to(splitText.chars, {
+        scaleY: scale,
+        duration: 0.5,
         ease: "power4.out",
-        stagger: { amount: 0.5, from: "random" }
+        stagger: { amount: 0.5, from: "random" },
       });
-      tl.to(
-        splitTop.chars,
-        { scaleY: topScale, duration: 0.75, ease: "power4.out" },
-        "<",
-      );
 
+      // --- 2. Transform-origin + alignment váltás ---
       tl.add(() => {
-        gsap.set(bottomRef.current, { opacity: 0 });
-        gsap.set(topRef.current, { opacity: 1 });
+        gsap.set(splitText.chars, { transformOrigin: "center top" });
+        gsap.set(containerRef.current, {
+          alignItems: "flex-start",
+          paddingBottom: 0,
+          paddingTop: isMobile ? "25vh" : 0,
+        });
       });
 
-      tl.to(splitTop.chars, {
+      // --- 3. Felirat visszahúzása ---
+      tl.to(splitText.chars, {
         scaleY: 1,
-        duration: 1,
+        duration: 0.75,
         ease: "elastic.out(1,0.5)",
         stagger: { amount: 0.5, from: "random" },
       });
 
-      // --- ICON + STEAM ---
+      // --- 4. Icon fade-in és steam animáció ---
       const steamWaves = iconRef.current.querySelectorAll(".steamwaves");
 
-      // icon fade-in
       tl.to(
         iconRef.current,
         { opacity: 1, duration: 1.3, ease: "power3.out" },
-        "<0.5",
+        "-=0.5",
       );
 
-      // steam entrance animation
       tl.fromTo(
         steamWaves,
         { y: 48, opacity: 0, scale: 0.75, transformOrigin: "center bottom" },
@@ -87,10 +83,9 @@ export default function PageLoader() {
           ease: "back.out(1.2)",
           stagger: { each: 0.35, from: "center" },
         },
-        "<0.2",
+        "-=1.0",
       );
 
-      // constant waving
       gsap.to(steamWaves, {
         keyframes: [
           {
@@ -107,7 +102,7 @@ export default function PageLoader() {
         stagger: { each: 0.7, from: "random" },
       });
 
-      // --- container fade-out ---
+      // --- 5. Container fade-out ---
       tl.to(
         containerRef.current,
         {
@@ -122,8 +117,7 @@ export default function PageLoader() {
       );
 
       return () => {
-        splitBottom.revert();
-        splitTop.revert();
+        splitText.revert();
       };
     },
     { scope: containerRef },
@@ -132,26 +126,16 @@ export default function PageLoader() {
   return (
     <div
       ref={containerRef}
-      className="page-loader fixed inset-0 bg-background overflow-hidden z-9999 leading-none"
+      className="page-loader fixed inset-0 flex justify-center bg-background overflow-hidden z-9999 leading-none"
     >
-      <div className="absolute inset-0 flex items-start justify-center">
-        <h1
-          ref={topRef}
-          className="text-black text-[12vw] font-bold select-none"
-        >
-          COOKBIRD
-        </h1>
-        <div className="h-[150vh] w-full absolute top-0 flex items-center justify-center">
-          <AnimatedIcon ref={iconRef} />
-        </div>
-      </div>
-      <div className="absolute inset-0 flex items-end justify-center">
-        <h1
-          ref={bottomRef}
-          className="text-black text-[12vw] font-bold select-none"
-        >
-          COOKBIRD
-        </h1>
+      <h1
+        ref={textRef}
+        className="text-black text-[12vw] font-bold select-none"
+      >
+        COOKBIRD
+      </h1>
+      <div className="h-[100dvh] w-full absolute top-1/2 max-md:-translate-y-1/2 md:top-0 flex items-center justify-center">
+        <AnimatedIcon ref={iconRef} />
       </div>
     </div>
   );
