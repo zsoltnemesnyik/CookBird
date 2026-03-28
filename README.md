@@ -15,3 +15,6 @@ CookBird is a lightweight web application that helps visitors discover recipes q
 - **Frontend:** React + Vite
 - **Styling:** Tailwind CSS
 - **Hosting:** Vercel
+
+## Live version (hosted on Vercel)
+[http://cookbird.vercel.app/]

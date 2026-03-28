@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -52,6 +54,7 @@ body {
 }
 
 @theme inline {
+  --font-sans: "Montserrat", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -161,7 +164,7 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
@@ -171,7 +174,7 @@ body {
 }
 
 .pagination-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -186,7 +189,7 @@ body {
 }
 
 .pagination-container::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -209,7 +212,6 @@ body {
   display: flex;
   
   div {
-    font-size: clamp(50px, calc(150vw / 8), 250px);
-    line-height: .8;
+    font-size: clamp(40px, calc(130vw / 8), 250px);
   }
 }
