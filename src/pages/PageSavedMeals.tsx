@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const PageSavedMeals = () => {
+  const [loading, setLoading] = useState(true);
   const { favourites, toggleFavourite } = useFavourites();
   const [meals, setMeals] = useState<Meal[]>([]);
 
   // Fetch all saved meals simultaneously
   useEffect(() => {
     const fetchMeals = async () => {
+      setLoading(true);
       const results = await Promise.all(
         favourites.map((id) =>
           fetch(`${import.meta.env.VITE_BASE_API}/lookup.php?i=${id}`)
@@ -21,6 +23,7 @@ const PageSavedMeals = () => {
       );
 
       setMeals(results);
+      setLoading(false);
     };
 
     fetchMeals();
@@ -32,7 +35,9 @@ const PageSavedMeals = () => {
         Saved Meals
       </h1>
 
-      {meals.length === 0 ? (
+      {loading ? (
+        <p className="text-center">Loading...</p>
+      ) : meals.length === 0 ? (
         <>
           <p className="text-center">No saved meals yet.</p>
           <Button asChild className="self-center">
