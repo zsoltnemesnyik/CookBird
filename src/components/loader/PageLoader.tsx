@@ -19,10 +19,19 @@ export default function PageLoader() {
 
       const splitText = SplitText.create(textRef.current, { type: "chars" });
 
+      const order = [3, 0, 5, 1, 6, 2, 4, 7];
+      const orderMap = new Map(order.map((val, idx) => [val, idx]));
+
+      const getReverseDelay = (i: number) =>
+        (order.length - 1 - (orderMap.get(i) ?? 0)) * 0.08;
+
+      const getDelay = (i: number) => (orderMap.get(i) ?? 0) * 0.08;
+
       gsap.set(splitText.chars, {
         scaleY: 1,
         transformOrigin: "center bottom",
       });
+
       gsap.set(iconRef.current, { opacity: 0 });
 
       gsap.set(containerRef.current, {
@@ -42,7 +51,7 @@ export default function PageLoader() {
         scaleY: scale,
         duration: 0.5,
         ease: "power4.out",
-        stagger: { amount: 0.5, from: "random" },
+        delay: (i) => getDelay(i),
       });
 
       // --- 2. Transform-origin + alignment váltás ---
@@ -60,7 +69,7 @@ export default function PageLoader() {
         scaleY: 1,
         duration: 0.75,
         ease: "elastic.out(1,0.5)",
-        stagger: { amount: 0.5, from: "random" },
+        delay: (i) => getReverseDelay(i),
       });
 
       // --- 4. Icon fade-in és steam animáció ---
@@ -134,7 +143,7 @@ export default function PageLoader() {
       >
         COOKBIRD
       </h1>
-      <div className="h-[100dvh] w-full absolute top-1/2 max-md:-translate-y-1/2 md:top-0 flex items-center justify-center">
+      <div className="h-dvh w-full absolute top-1/2 max-md:-translate-y-1/2 md:top-0 flex items-center justify-center">
         <AnimatedIcon ref={iconRef} />
       </div>
     </div>
