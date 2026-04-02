@@ -89,7 +89,7 @@ const NotFoundAnimation = () => {
         })}
       </div>
 
-      <div className={`flex items-center justify-center transition-all duration-500 ${showDiv ? "opacity-100 max-w-[30%] visible" : "max-w-0 opacity-0 invisible" }`}>
+      <div className={`flex items-center justify-center transition-all duration-500 ${showDiv ? "opacity-100 max-w-[30%] visible" : "max-w-0 opacity-0 invisible"}`}>
         <Button asChild size={"lg"}>
           <Link to="/">
             <ArrowLeft className="mr" />
